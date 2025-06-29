@@ -1,0 +1,266 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+}
+
+.game-info {
+    display: flex;
+    gap: 20px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.label {
+    font-size: 0.8em;
+    color: #666;
+    font-weight: bold;
+}
+
+#mine-count, #timer {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #dc3545;
+    font-family: 'Courier New', monospace;
+    background: #000;
+    color: #ff0000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    min-width: 40px;
+    text-align: center;
+}
+
+.reset-button {
+    background: none;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 1.5em;
+    transition: all 0.2s ease;
+}
+
+.reset-button:hover {
+    transform: scale(1.1);
+    border-color: #007bff;
+}
+
+.reset-button:active {
+    transform: scale(0.95);
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 2px;
+    background: #bdbdbd;
+    border: 3px solid #757575;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 20px auto;
+    max-width: 400px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.cell {
+    width: 35px;
+    height: 35px;
+    background: #c0c0c0;
+    border: 2px outset #c0c0c0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    user-select: none;
+    transition: all 0.1s ease;
+}
+
+.cell:hover:not(.revealed):not(.flagged) {
+    background: #d0d0d0;
+    transform: scale(1.05);
+}
+
+.cell.revealed {
+    background: #e0e0e0;
+    border: 1px inset #e0e0e0;
+    cursor: default;
+}
+
+.cell.mine {
+    background: #ff4444;
+    color: white;
+}
+
+.cell.flagged {
+    background: #c0c0c0;
+    color: #ff0000;
+    font-size: 16px;
+}
+
+.cell.number-1 { color: #0000ff; }
+.cell.number-2 { color: #008000; }
+.cell.number-3 { color: #ff0000; }
+.cell.number-4 { color: #000080; }
+.cell.number-5 { color: #800000; }
+.cell.number-6 { color: #008080; }
+.cell.number-7 { color: #000000; }
+.cell.number-8 { color: #808080; }
+
+.game-status {
+    margin: 20px 0;
+}
+
+#game-message {
+    font-size: 1.1em;
+    color: #333;
+    font-weight: 500;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.control-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.control-button:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+.control-button:active {
+    transform: translateY(0);
+}
+
+.difficulty-select {
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    background: white;
+    cursor: pointer;
+}
+
+.difficulty-select:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+/* 게임 상태별 스타일 */
+.game-won {
+    animation: celebration 0.5s ease-in-out;
+}
+
+.game-lost .cell.mine {
+    animation: explode 0.3s ease-in-out;
+}
+
+@keyframes celebration {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes explode {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    h1 {
+        font-size: 1.5em;
+    }
+    
+    .game-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .game-board {
+        max-width: 320px;
+    }
+    
+    .cell {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+    
+    .controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* 우클릭 방지 */
+.game-board {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

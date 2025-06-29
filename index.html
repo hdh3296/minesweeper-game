@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지뢰찾기 게임</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 지뢰찾기</h1>
+        
+        <div class="game-header">
+            <div class="game-info">
+                <div class="info-item">
+                    <span class="label">지뢰:</span>
+                    <span id="mine-count">10</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">시간:</span>
+                    <span id="timer">000</span>
+                </div>
+            </div>
+            
+            <button id="reset-btn" class="reset-button">
+                <span id="game-face">😊</span>
+            </button>
+        </div>
+        
+        <div id="game-board" class="game-board">
+            <!-- 게임 보드가 여기에 동적으로 생성됩니다 -->
+        </div>
+        
+        <div class="game-status">
+            <p id="game-message">좌클릭으로 셀을 열고, 우클릭으로 깃발을 표시하세요!</p>
+        </div>
+        
+        <div class="controls">
+            <button id="new-game-btn" class="control-button">새 게임</button>
+            <select id="difficulty-select" class="difficulty-select">
+                <option value="beginner">초급 (9x9, 10개)</option>
+                <option value="intermediate" disabled>중급 (16x16, 40개)</option>
+                <option value="expert" disabled>고급 (16x30, 99개)</option>
+            </select>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
